@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYDKUR - Profesjonalne Usługi Dekarskie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 
+        PALETA KOLORÓW - MIEJSCA DO ZMIANY:
+        
+        --primary: #396e83;           -> Główny kolor (przyciski, nagłówki)
+        --primary-dark: #2a5263;       -> Ciemniejszy odcień głównego koloru
+        --secondary: #333333;          -> Kolor tekstu nagłówków
+        --accent: #d4af37;             -> Kolor akcentów (przyciski CTA, hover)
+        --light: #f8f9fa;              -> Kolor tła strony
+        --dark: #2a2a2a;               -> Ciemny kolor (stopka)
+        --text: #3f3f3f;               -> Kolor głównego tekstu
+        --text-light: #666666;         -> Kolor drugorzędnego tekstu
+        --card-bg: #ffffff;            -> Kolor tła kart/sekcji
+        --success: #27a745;            -> Kolor sukcesu (powiadomienia)
+        --border: #e0e0e0;             -> Kolor obramowań
+        */
+        
+        :root {
+            --primary: #396e83;
+            --primary-dark: #2a5263;
+            --secondary: #333333;
+            --accent: #d4af37;
+            --light: #f8f9fa;
+            --dark: #2a2a2a;
+            --text: #3f3f3f;
+            --text-light: #666666;
+            --card-bg: #ffffff;
+            --success: #27a745;
+            --border: #e0e0e0;
+        }
+        
+        /* Reset i podstawowe style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Sekcje */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 60px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Nagłówek */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            color: var(--secondary);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 35px;
+        }
+        
+        nav ul li a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 1rem;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+        
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #e6c158);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* Kalkulator */
+        .calculator {
+            background: linear-gradient(135deg, #f8fafc, #eef2f7);
+            padding: 80px 0;
+        }
+        
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .calculator-steps {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .calculator-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 15px 0;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;   
+        }        
+        
+        .step-active .step-number {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .step-completed .step-number {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        
+        .step-line {
+            position: absolute;
+            top: 35px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border);
+            z-index: 1;
+            margin: 0 20%;
+        }
+        
+        .calculator-form {
+            margin-top: 30px;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .calculator-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .option-card {
+            background-color: var(--light);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .option-card.selected {
+            border-color: var(--primary);
+            background-color: rgba(57, 110, 131, 0.05);
+            box-shadow: 0 5px 15px rgba(57, 110, 131, 0.1);
+        }
+        
+        .option-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .calculator-input-group {
+            margin-bottom: 20px;
+        }
+        
+        .calculator-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        .calculator-input-group input,
+        .calculator-input-group select {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: var(--light);
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .calculator-input-group input:focus,
+        .calculator-input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(57, 110, 131, 0.1);
+        }
+        
+        .calculator-range {
+            margin-top: 10px;
+        }
+        
+        .calculator-range input {
+            width: 100%;
+        }
+        
+        .calculator-range-value {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+        
+        .calculator-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .calculator-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .calculator-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(57, 110, 131, 0.3);
+        }
+        
+        .calculator-btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .calculator-btn-outline:hover {
+            background-color: rgba(57, 110, 131, 0.05);
+        }
+        
+        .calculator-result {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc, #eef2f7);
+            border-radius: 10px;
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .calculator-result.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .result-details {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .result-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .calculator-note {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Sekcje */
+        h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: var(--secondary);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        /* Usługi */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-image {
+            height: 200px;
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-card h4 i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .price {
+            font-weight: 600;
+            color: var(--primary);
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .price-note {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            transition: color 0.3s;
+            color: var(--secondary);
+        }
+        
+        .faq-question:hover {
+            color: var(--primary);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            display: none;
+            padding-top: 10px;
+            color: var(--text);
+        }
+        
+        /* Kontakt */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: var(--light);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-item h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .contact-details {
+            margin-top: 15px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        /* Stopka */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin: 30px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Przycisk powrotu do góry */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(57, 110, 131, 0.3);
+            transition: all 0.3s;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(57, 110, 131, 0.4);
+        }
+        
+        /* Responsywność */
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-container {
+                padding: 40px 30px;
+            }
+            
+            .calculator-container {
+                padding: 30px;
+            }
+            
+            .calculator-options {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 40px 40px;
+                transition: right 0.4s;
+                z-index: 999;
+                overflow-y: auto;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                font-size: 1.1rem;
+                padding: 10px 0;
+                display: block;
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-container {
+                padding: 30px 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-item {
+                min-width: 100%;
+            }
+            
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .logo img {
+                height: 50px;
+            }
+            
+            .calculator-steps {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .step-line {
+                display: none;
+            }
+            
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-container {
+                padding: 20px 15px;
+            }
+            
+            .logo img {
+                height: 45px;
+            }
+            
+            .calculator-container {
+                padding: 20px;
+            }
+            
+            .calculator-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-price {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Animacje */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Galeria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gallery-item {
+            height: 200px;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Mapa obszaru */
+        .area-map {
+            height: 300px;
+            background-color: #f1f5f9;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .area-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Formularz kontaktowy */
+        .contact-form {
+            margin-top: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: var(--light);
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(57, 110, 131, 0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(57, 110, 131, 0.3);
+        }
+        
+        /* Liczniki */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        /* Powiadomienie */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        .cta-section .cta-button {
+            background: linear-gradient(135deg, var(--accent), #e6c158);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Poprawki dla lepszej czytelności */
+        .service-card p {
+            margin-bottom: 12px;
+        }
+        
+        .service-card .price {
+            margin-top: 15px;
+        }
+        
+        .service-card .price-note {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nagłówek -->
+    <header id="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="image/logo.svg" alt="DYDKUR Logo"> 
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#o-nas">O nas</a></li>
+                    <li><a href="#uslugi">Usługi</a></li>
+                    <li><a href="#kalkulator">Kalkulator</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#obszar">Obszar działania</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Profesjonalne Usługi Dekarskie</h1>
+            <p>Solidność, precyzja i doświadczenie w każdym projekcie</p>
+            <a href="#kalkulator" class="cta-button">Oblicz koszt usługi</a>
+        </div>
+    </section>
+
+    <!-- O nas -->
+    <section id="o-nas">
+        <div class="container">
+            <div class="section-container fade-in">
+                <div class="section-header">
+                    <h2>O nas</h2>
+                    <p>Poznaj naszą firmę i zespół doświadczonych fachowców</p>
+                </div>
+                <p>Jesteśmy nową firmą prowadzoną przez dwóch doświadczonych fachowców – Mateusza i Patryka. Naszą specjalnością są dachy, altanki i kompleksowe prace dekarskie.</p>
+                <p>Do każdego zlecenia podchodzimy z pełnym zaangażowaniem, wykonując pracę ponad swoje możliwości, aby efekt końcowy był zawsze satysfakcjonujący dla klienta. Stawiamy na dokładność, trwałość i estetykę, bo dach to nie tylko ochrona, ale wizytówka całego domu.</p>
+                <p>DYDKUR to gwarancja jakości, terminowości i uczciwej współpracy.</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="50">0</span>
+                        <span class="stat-label">Zrealizowanych projektów</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="5">0</span>
+                        <span class="stat-label">Lat doświadczenia</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="100">0</span>
+                        <span class="stat-label">% Zadowolonych klientów</span>
+                    </div>
+                </div>
+                
+                <div class="service-image" style="margin-top: 30px;">
+                    <img src="https://images.unsplash.com/photo-1581093458791-8a6b6d45a9c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fachowcy przy pracy na dachu">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kalkulator -->
+    <section id="kalkulator" class="calculator">
+        <div class="container">
+            <div class="calculator-container fade-in">
+                <div class="section-header">
+                    <h2>Kalkulator Kosztów</h2>
+                    <p>Oszacuj koszt swojej inwestycji w kilka prostych kroków</p>
+                </div>
+                
+                <div class="calculator-steps">
+                    <div class="calculator-step step-active" id="step-1">
+                        <div class="step-number">1</div>
+                        <p>Wybierz usługę</p>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="calculator-step" id="step-2">
+                        <div class="step-number">2</div>
+                        <p>Określ parametry</p>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="calculator-step" id="step-3">
+                        <div class="step-number">3</div>
+                        <p>Otrzymaj wycenę</p>
+                    </div>
+                </div>
+                
+                <div class="calculator-form">
+                    <!-- Krok 1: Wybór usługi -->
+                    <div class="form-step active" id="form-step-1">
+                        <h3>Jaką usługę potrzebujesz?</h3>
+                        <div class="calculator-options">
+                            <div class="option-card" data-service="dach">
+                                <div class="option-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <h4>Dach od podstaw</h4>
+                                <p>Kompleksowa budowa dachu od zera</p>
+                            </div>
+                            <div class="option-card" data-service="altanka">
+                                <div class="option-icon">
+                                    <i class="fas fa-tree"></i>
+                                </div>
+                                <h4>Altanka ogrodowa</h4>
+                                <p>Projekt i budowa altany w ogrodzie</p>
+                            </div>
+                            <div class="option-card" data-service="naprawa">
+                                <div class="option-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h4>Naprawa dachu</h4>
+                                <p>Renowacja i naprawa istniejącego dachu</p>
+                            </div>
+                            <div class="option-card" data-service="rynny">
+                                <div class="option-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <h4>System rynnowy</h4>
+                                <p>Montaż lub wymiana systemu odprowadzania wody</p>
+                            </div>
+                        </div>
+                        <div class="calculator-navigation">
+                            <div></div> <!-- Puste miejsce dla wyrównania -->
+                            <button class="calculator-btn" id="next-step-1">Dalej</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Krok 2: Parametry -->
+                    <div class="form-step" id="form-step-2">
+                        <h3>Określ parametry swojej inwestycji</h3>
+                        <div class="calculator-inputs">
+                            <div class="calculator-input-group">
+                                <label for="powierzchnia">Powierzchnia (m²)</label>
+                                <input type="number" id="powierzchnia" min="10" max="1000" value="100">
+                                <div class="calculator-range">
+                                    <input type="range" id="powierzchnia-range" min="10" max="1000" value="100" step="10">
+                                    <div class="calculator-range-value" id="powierzchnia-value">100 m²</div>
+                                </div>
+                            </div>
+                            
+                            <div class="calculator-input-group">
+                                <label for="material">Rodzaj pokrycia</label>
+                                <select id="material">
+                                    <option value="dachowka">Dachówka ceramiczna</option>
+                                    <option value="blachodachowka">Blachodachówka</option>
+                                    <option value="papa">Papa termozgrzewalna</option>
+                                    <option value="blacha">Blacha na rąbek</option>
+                                </select>
+                            </div>
+                            
+                            <div class="calculator-input-group">
+                                <label for="stopien">Stopień skomplikowania</label>
+                                <select id="stopien">
+                                    <option value="prosty">Prosty (1-2 połacie)</option>
+                                    <option value="sredni" selected>Średni (3-4 połacie)</option>
+                                    <option value="skomplikowany">Skomplikowany (wiele załamań)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="calculator-input-group">
+                                <label for="dodatki">Dodatkowe usługi</label>
+                                <select id="dodatki">
+                                    <option value="brak">Brak dodatków</option>
+                                    <option value="okna">Okna dachowe</option>
+                                    <option value="komin">Obróbka komina</option>
+                                    <option value="komplet">Komplet (okna + komin)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calculator-navigation">
+                            <button class="calculator-btn calculator-btn-outline" id="prev-step-2">Wstecz</button>
+                            <button class="calculator-btn" id="next-step-2">Oblicz koszt</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Krok 3: Wynik -->
+                    <div class="form-step" id="form-step-3">
+                        <h3>Szacunkowy koszt Twojej inwestycji</h3>
+                        <div class="calculator-result" id="calculator-result">
+                            <div class="result-price" id="result-price">0 zł</div>
+                            <p>Szacunkowy koszt wykonania usługi</p>
+                            
+                            <div class="result-details">
+                                <div class="result-detail">
+                                    <span>Wybrana usługa:</span>
+                                    <span id="detail-service">-</span>
+                                </div>
+                                <div class="result-detail">
+                                    <span>Powierzchnia:</span>
+                                    <span id="detail-powierzchnia">-</span>
+                                </div>
+                                <div class="result-detail">
+                                    <span>Pokrycie:</span>
+                                    <span id="detail-material">-</span>
+                                </div>
+                                <div class="result-detail">
+                                    <span>Stopień skomplikowania:</span>
+                                    <span id="detail-stopien">-</span>
+                                </div>
+                                <div class="result-detail">
+                                    <span>Dodatkowe usługi:</span>
+                                    <span id="detail-dodatki">-</span>
+                                </div>
+                            </div>
+                            
+                            <div class="calculator-note">
+                                * Podana cena ma charakter orientacyjny. Dokładna wycena wymaga bezpłatnej wizyty na miejscu.
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-navigation">
+                            <button class="calculator-btn calculator-btn-outline" id="prev-step-3">Wstecz</button>
+                            <button class="calculator-btn" id="new-calculation">Nowe obliczenie</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usługi -->
+    <section id="uslugi" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-container fade-in">
+                <div class="section-header">
+                    <h2>Nasze Usługi</h2>
+                    <p>Kompleksowe rozwiązania dekarskie na najwyższym poziomie</p>
+                </div>
+                <div class="services-grid">
+                    <!-- Usługa 1 -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1571624436279-b272aff752b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nowo budowany dach">
+                        </div>
+                        <div class="service-content">
+                            <h4><i class="fas fa-home"></i> Dachy od podstaw</h4>
+                            <p>Budujemy dachy kompleksowo od zera – od wykonania więźby dachowej, przez izolację termiczną i przeciwwilgociową, aż po montaż pokrycia. Korzystamy wyłącznie z wysokiej jakości materiałów, takich jak dachówki ceramiczne, betonowe, blachodachówki i papa termozgrzewalna. Każdy dach wykonujemy z zachowaniem norm technicznych, odpowiedniego spadku i wentylacji, co gwarantuje trwałość i bezpieczeństwo konstrukcji. Pracujemy na projektach indywidualnych lub gotowych, oferując również doradztwo w zakresie doboru technologii.</p>
+                            <p class="price">Cena (2025): 180 – 510 zł/m²</p>
+                            <p class="price-note">Podana cena ma charakter orientacyjny. Każda realizacja jest wyceniana indywidualnie, w zależności od zakresu prac, użytych materiałów i specyfiki projektu.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Usługa 2 -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Drewniana altanka w ogrodzie">
+                        </div>
+                        <div class="service-content">
+                            <h4><i class="fas fa-tree"></i> Altanki od podstaw</h4>
+                            <p>Projektujemy i budujemy altany ogrodowe, wiaty oraz pergole w różnych stylach – nowoczesnym, rustykalnym i klasycznym. Każdą konstrukcję wykonujemy od podstaw: fundament, szkielet drewniany, dach, podłoga oraz wykończenie. Drewno, z którego korzystamy, jest impregnowane i odporne na warunki atmosferyczne, dzięki czemu altanka zachowuje estetykę przez lata. Oferujemy również montaż oświetlenia, zabudowy bocznej oraz malowanie konstrukcji.</p>
+                            <p class="price">Cena (2025): 700 – 1 400 zł/m²</p>
+                            <p class="price-note">Podana cena ma charakter orientacyjny. Każda realizacja jest wyceniana indywidualnie, w zależności od zakresu prac, użytych materiałów i specyfiki projektu.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Usługa 3 -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pracownik naprawiający dach">
+                        </div>
+                        <div class="service-content">
+                            <h4><i class="fas fa-tools"></i> Naprawy dachów</h4>
+                            <p>Specjalizujemy się w szybkiej diagnozie i skutecznej naprawie dachów każdego typu. Usuwamy przecieki, wymieniamy uszkodzone dachówki, blachy i elementy konstrukcji, a także czyścimy i konserwujemy powierzchnię dachu. Przeprowadzamy renowacje dachów z blachy, papy oraz dachówek, zapewniając przy tym trwałe uszczelnienie i estetyczny wygląd. Wykorzystujemy profesjonalne narzędzia dekarskie i wysokiej jakości materiały naprawcze, co pozwala przywrócić dach do pełnej sprawności.</p>
+                            <p class="price">Cena (2025): 50 – 200 zł/m²</p>
+                            <p class="price-note">Podana cena ma charakter orientacyjny. Każda realizacja jest wyceniana indywidualnie, w zależności od zakresu prac, użytych materiałów i specyfiki projektu.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Usługa 4 -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Montaż rynien">
+                        </div>
+                        <div class="service-content">
+                            <h4><i class="fas fa-tint"></i> Rynny</h4>
+                            <p>Zajmujemy się montażem, wymianą i czyszczeniem systemów rynnowych z PCV, aluminium i stali powlekanej. Zapewniamy odpowiednie spadki, szczelność i estetyczne wykończenie, by system skutecznie odprowadzał wodę deszczową. Dodatkowo oferujemy czyszczenie rynien, montaż siatek przeciw liściom oraz instalację rur spustowych. Dobrze wykonany system rynnowy to nie tylko ochrona dachu i elewacji, ale też wydłużenie ich żywotności.</p>
+                            <p class="price">Cena (2025): 130 – 270 zł/m²</p>
+                            <p class="price-note">Podana cena ma charakter orientacyjny. Każda realizacja jest wyceniana indywidualnie, w zależności od zakresu prac, użytych materiałów i specyfiki projektu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="galeria">
+        <div class="container">
+            <div class="section-container fade-in">
+                <div class="section-header">
+                    <h2>Galeria</h2>
+                    <p>Zobacz nasze realizacje i efekty pracy</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1571624436279-b272aff752b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Realizacja 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Realizacja 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Realizacja 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1564501049418-7d0361a4c8f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Realizacja 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1581093458791-8a6b6d45a9c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Realizacja 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600585154340-6fba467f08e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Realizacja 6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Masz pytania? Skontaktuj się z nami!</h2>
+            <p>Doradzimy bez zobowiązań! Darmowa wycena i szybki termin realizacji!</p>
+            <a href="#kontakt" class="cta-button">Skontaktuj się z nami</a>
+        </div>
+    </section>
+
+    <!-- Obszar działania -->
+    <section id="obszar" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-container fade-in">
+                <div class="section-header">
+                    <h2>Obszar działania</h2>
+                    <p>Działamy na terenie Zielonej Góry i okolic do 300 km</p>
+                </div>
+                <div class="area-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200378.3359912994!2d15.34706035415126!3d51.93528183385902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4705c9a6d8b6b8b5%3A0x7e0b9f9f9f9f9f9f!2sZielona%20G%C3%B3ra!5e0!3m2!1spl!2spl!4v1620000000000!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <p style="text-align: center; font-weight: 600; color: var(--secondary);">Zielona Góra i okolice do 300 km</p>
+                <p style="text-align: center;">Obejmuje m.in.: Poznań, Gorzów Wielkopolski, Wrocław, Legnica, Leszno, Lubin, Nowa Sól, Żagań, Świebodzin, Sulechów i okolice.</p>
+                <p style="text-align: center; margin-top: 20px; font-weight: 500;">Realizujemy zlecenia w całym woj. lubuskim oraz sąsiednich regionach.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-container fade-in">
+                <div class="section-header">
+                    <h2>FAQ – Najczęstsze pytania</h2>
+                    <p>Odpowiedzi na najczęściej zadawane pytania</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">1️⃣ Czy wykonujecie darmowe wyceny? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Tak, każda wycena jest bezpłatna i niezobowiązująca. Wystarczy telefon lub wiadomość.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">2️⃣ Jak długo trwa budowa dachu? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Zazwyczaj od 3 do 10 dni roboczych – zależnie od wielkości i rodzaju pokrycia.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">3️⃣ Czy pracujecie zimą? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Tak, wykonujemy naprawy i montaż pap, rynien oraz prace murowe także w sezonie zimowym (jeśli pozwala pogoda).</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">4️⃣ Czy pomagacie dobrać materiały? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Oczywiście – doradzamy najlepsze rozwiązania dopasowane do budżetu i potrzeb klienta.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">5️⃣ Czy dajecie gwarancję na wykonane prace? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Tak, udzielamy gwarancji na wszystkie nasze usługi.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-container fade-in">
+                <div class="section-header">
+                    <h2>Kontakt</h2>
+                    <p>Skontaktuj się z nami, aby uzyskać wycenę lub umówić termin</p>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3><i class="fas fa-phone"></i> Telefon</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-mobile-alt"></i> +48 123 456 789</p>
+                            <p><i class="fas fa-phone"></i> +48 987 654 321</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <h3><i class="fas fa-envelope"></i> E-mail</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-at"></i> biuro@dydkur.pl</p>
+                            <p><i class="fas fa-at"></i> zapytania@dydkur.pl</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <h3><i class="fas fa-map-marker-alt"></i> Lokalizacja</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-home"></i> ul. Dekarska 15</p>
+                            <p><i class="fas fa-city"></i> 65-001 Zielona Góra</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <h3><i class="fas fa-clock"></i> Godziny pracy</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-calendar-day"></i> Pon. - Sob.</p>
+                            <p><i class="fas fa-clock"></i> 7:00 – 18:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="text-align: center; margin-top: 40px;">Formularz kontaktowy</h3>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Imię i nazwisko *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adres e-mail *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Numer telefonu</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Rodzaj usługi</label>
+                                <select id="service" name="service">
+                                    <option value="">Wybierz usługę</option>
+                                    <option value="dachy">Dachy od podstaw</option>
+                                    <option value="altanki">Altanki od podstaw</option>
+                                    <option value="naprawy">Naprawy dachów</option>
+                                    <option value="rynny">Rynny</option>
+                                    <option value="okna">Okna dachowe</option>
+                                    <option value="papa">Papa dachowa</option>
+                                    <option value="kominy">Kominy</option>
+                                    <option value="epoksyd">Masy epoksydowe</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Wiadomość *</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Wyślij wiadomość</button>
+                    </form>
+                </div>
+                
+                <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; font-weight: 500;">Zadzwoń – doradzimy, wycenimy i umówimy dogodny termin!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <div class="footer-content">
+            <p style="font-size: 1.2rem; font-weight: 600;">DYDKUR - Profesjonalne Usługi Dekarskie</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#kontakt"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="copyright">
+                <p>© 2025 DYDKUR | Dachy, Altanki, Naprawy dachów | Realizacja z pasją</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Przycisk powrotu do góry -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Powiadomienie -->
+    <div class="notification" id="notification">
+        Wiadomość została wysłana! Skontaktujemy się z Tobą w ciągu 24 godzin.
+    </div>
+
+    <script>
+        // Kalkulator kosztów
+        document.addEventListener('DOMContentLoaded', function() {
+            // Zmienne kalkulatora
+            let currentStep = 1;
+            let selectedService = '';
+            
+            // Cennik usług (ceny za m²)
+            const priceRanges = {
+                'dach': { min: 180, max: 510 },
+                'altanka': { min: 700, max: 1400 },
+                'naprawa': { min: 50, max: 200 },
+                'rynny': { min: 130, max: 270 }
+            };
+            
+            // Mnożniki dla różnych opcji
+            const materialMultipliers = {
+                'dachowka': 1.2,
+                'blachodachowka': 1.0,
+                'papa': 0.8,
+                'blacha': 1.1
+            };
+            
+            const complexityMultipliers = {
+                'prosty': 0.9,
+                'sredni': 1.0,
+                'skomplikowany': 1.3
+            };
+            
+            const additionalMultipliers = {
+                'brak': 1.0,
+                'okna': 1.15,
+                'komin': 1.1,
+                'komplet': 1.25
+            };
+            
+            // Elementy kalkulatora
+            const stepElements = document.querySelectorAll('.calculator-step');
+            const formSteps = document.querySelectorAll('.form-step');
+            const optionCards = document.querySelectorAll('.option-card');
+            const powierzchniaInput = document.getElementById('powierzchnia');
+            const powierzchniaRange = document.getElementById('powierzchnia-range');
+            const powierzchniaValue = document.getElementById('powierzchnia-value');
+            const materialSelect = document.getElementById('material');
+            const complexitySelect = document.getElementById('stopien');
+            const additionalSelect = document.getElementById('dodatki');
+            const resultElement = document.getElementById('calculator-result');
+            const resultPrice = document.getElementById('result-price');
+            const detailService = document.getElementById('detail-service');
+            const detailPowierzchnia = document.getElementById('detail-powierzchnia');
+            const detailMaterial = document.getElementById('detail-material');
+            const detailStopien = document.getElementById('detail-stopien');
+            const detailDodatki = document.getElementById('detail-dodatki');
+            
+            // Obsługa wyboru usługi
+            optionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    optionCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedService = this.getAttribute('data-service');
+                });
+            });
+            
+            // Synchronizacja inputów powierzchni
+            powierzchniaInput.addEventListener('input', function() {
+                powierzchniaRange.value = this.value;
+                powierzchniaValue.textContent = this.value + ' m²';
+            });
+            
+            powierzchniaRange.addEventListener('input', function() {
+                powierzchniaInput.value = this.value;
+                powierzchniaValue.textContent = this.value + ' m²';
+            });
+            
+            // Nawigacja krokami
+            document.getElementById('next-step-1').addEventListener('click', function() {
+                if (!selectedService) {
+                    alert('Proszę wybrać usługę');
+                    return;
+                }
+                goToStep(2);
+            });
+            
+            document.getElementById('prev-step-2').addEventListener('click', function() {
+                goToStep(1);
+            });
+            
+            document.getElementById('next-step-2').addEventListener('click', function() {
+                calculateCost();
+                goToStep(3);
+            });
+            
+            document.getElementById('prev-step-3').addEventListener('click', function() {
+                goToStep(2);
+            });
+            
+            document.getElementById('new-calculation').addEventListener('click', function() {
+                resetCalculator();
+                goToStep(1);
+            });
+            
+            // Funkcja zmiany kroku
+            function goToStep(step) {
+                // Ukryj wszystkie kroki
+                formSteps.forEach(formStep => {
+                    formStep.classList.remove('active');
+                });
+                
+                // Pokaż wybrany krok
+                document.getElementById(`form-step-${step}`).classList.add('active');
+                
+                // Aktualizuj wskaźniki kroków
+                stepElements.forEach((stepEl, index) => {
+                    stepEl.classList.remove('step-active', 'step-completed');
+                    if (index + 1 < step) {
+                        stepEl.classList.add('step-completed');
+                    } else if (index + 1 === step) {
+                        stepEl.classList.add('step-active');
+                    }
+                });
+                
+                currentStep = step;
+            }
+            
+            // Funkcja obliczania kosztu
+            function calculateCost() {
+                const powierzchnia = parseInt(powierzchniaInput.value);
+                const material = materialSelect.value;
+                const complexity = complexitySelect.value;
+                const additional = additionalSelect.value;
+                
+                // Pobierz zakres cen dla wybranej usługi
+                const priceRange = priceRanges[selectedService];
+                const basePrice = (priceRange.min + priceRange.max) / 2;
+                
+                // Oblicz cenę z uwzględnieniem mnożników
+                let finalPrice = basePrice * powierzchnia;
+                finalPrice *= materialMultipliers[material];
+                finalPrice *= complexityMultipliers[complexity];
+                finalPrice *= additionalMultipliers[additional];
+                
+                // Zaokrąglij do pełnych tysięcy
+                finalPrice = Math.round(finalPrice / 1000) * 1000;
+                
+                // Formatuj cenę
+                const formattedPrice = finalPrice.toLocaleString('pl-PL') + ' zł';
+                
+                // Aktualizuj wyniki
+                resultPrice.textContent = formattedPrice;
+                detailService.textContent = getServiceName(selectedService);
+                detailPowierzchnia.textContent = powierzchnia + ' m²';
+                detailMaterial.textContent = getMaterialName(material);
+                detailStopien.textContent = getComplexityName(complexity);
+                detailDodatki.textContent = getAdditionalName(additional);
+                
+                // Pokaż wynik
+                resultElement.classList.add('active');
+            }
+            
+            // Funkcje pomocnicze do nazw
+            function getServiceName(service) {
+                const names = {
+                    'dach': 'Dach od podstaw',
+                    'altanka': 'Altanka ogrodowa',
+                    'naprawa': 'Naprawa dachu',
+                    'rynny': 'System rynnowy'
+                };
+                return names[service] || service;
+            }
+            
+            function getMaterialName(material) {
+                const names = {
+                    'dachowka': 'Dachówka ceramiczna',
+                    'blachodachowka': 'Blachodachówka',
+                    'papa': 'Papa termozgrzewalna',
+                    'blacha': 'Blacha na rąbek'
+                };
+                return names[material] || material;
+            }
+            
+            function getComplexityName(complexity) {
+                const names = {
+                    'prosty': 'Prosty',
+                    'sredni': 'Średni',
+                    'skomplikowany': 'Skomplikowany'
+                };
+                return names[complexity] || complexity;
+            }
+            
+            function getAdditionalName(additional) {
+                const names = {
+                    'brak': 'Brak',
+                    'okna': 'Okna dachowe',
+                    'komin': 'Obróbka komina',
+                    'komplet': 'Komplet (okna + komin)'
+                };
+                return names[additional] || additional;
+            }
+            
+            // Reset kalkulatora
+            function resetCalculator() {
+                optionCards.forEach(card => card.classList.remove('selected'));
+                selectedService = '';
+                powierzchniaInput.value = 100;
+                powierzchniaRange.value = 100;
+                powierzchniaValue.textContent = '100 m²';
+                materialSelect.value = 'dachowka';
+                complexitySelect.value = 'sredni';
+                additionalSelect.value = 'brak';
+                resultElement.classList.remove('active');
+            }
+            
+            // Pozostały kod JavaScript (hamburger menu, przewijanie, itp.)
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Zamknij menu po kliknięciu w link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Płynne przewijanie do sekcji
+            document.querySelectorAll('nav a, .cta-button').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        const targetSection = document.querySelector(targetId);
+                        
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // FAQ - rozwijanie odpowiedzi
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    const isVisible = answer.style.display === 'block';
+                    
+                    // Zamknij wszystkie odpowiedzi
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        ans.style.display = 'none';
+                    });
+                    
+                    // Zresetuj wszystkie ikony
+                    document.querySelectorAll('.faq-question i').forEach(i => {
+                        i.style.transform = 'rotate(0deg)';
+                    });
+                    
+                    // Jeśli odpowiedź była ukryta, pokaż ją
+                    if (!isVisible) {
+                        answer.style.display = 'block';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+            
+            // Animacja pojawiania się elementów przy scrollowaniu
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const backToTop = document.getElementById('backToTop');
+            const header = document.getElementById('header');
+            
+            const fadeInOnScroll = () => {
+                // Elementy fade-in
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+                
+                // Przycisk powrotu do góry
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                    header.classList.add('scrolled');
+                } else {
+                    backToTop.classList.remove('visible');
+                    header.classList.remove('scrolled');
+                }
+            };
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            // Wywołaj raz na początku, aby pokazać elementy już widoczne
+            fadeInOnScroll();
+            
+            // Płynne przewijanie do góry
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Animacja liczników
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-count');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(() => animateCounters(), 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                });
+            };
+            
+            // Obserwator dla liczników
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            document.querySelectorAll('.stat-item').forEach(item => {
+                counterObserver.observe(item);
+            });
+            
+            // Formularz kontaktowy
+            const contactForm = document.getElementById('contactForm');
+            const notification = document.getElementById('notification');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Tutaj można dodać kod do wysyłania formularza
+                // Na potrzeby demonstracji pokazujemy powiadomienie
+                notification.classList.add('show');
+                
+                // Reset formularza
+                contactForm.reset();
+                
+                // Ukryj powiadomienie po 5 sekundach
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
